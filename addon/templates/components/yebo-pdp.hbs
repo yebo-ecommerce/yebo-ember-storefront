@@ -1,0 +1,43 @@
+<div class="row">
+  <div class="small-12 medium-4 columns">
+    {{yebo-images images=selectedVariant.images}}
+    {{yebo-properties properties=product.productProperties}}
+  </div>
+  <div class="small-12 medium-8 columns">
+    <div class="row">
+      <div class="small-12 columns">
+        <h1>{{product.name}}</h1>
+        <hr>
+        {{#if selectedVariant.description}}
+          <h6>{{selectedVariant.description}}</h6>
+        {{else}}
+          <h6>No Description</h6>
+        {{/if}}
+      </div>
+      {{#if product.variants.length}}
+        <div class="small-12 medium-6 columns left">
+          <h3>Variants</h3>
+          <select onchange={{action "selectVariant" value="target.value"}}>
+            {{#each product.variants as |variant|}}
+              <option value={{variant.id}}>{{variant.optionsText}}</option>
+            {{/each}}
+          </select>
+        </div>
+      {{/if}}
+      <div class="small-12 medium-6  columns left">
+        <h3>Price: {{selectedVariant.price}}</h3>
+        {{input value=quantity placeholder="Quantity"}}
+      </div>
+      <div class='small-12 columns'>
+        <button class="expand" disabled={{not selectedVariant.canSupply}} {{action 'addToCart'}}>
+          {{#if selectedVariant.canSupply}}
+            Add To Cart
+          {{else}}
+            Product not available
+          {{/if}}
+        </button>
+      </div>
+    </div>
+
+  </div>
+</div>

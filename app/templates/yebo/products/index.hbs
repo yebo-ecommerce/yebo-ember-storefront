@@ -1,0 +1,5 @@
+<div class="row">
+  <h1>Products ({{model.search.meta.total_count}} products found)</h1>
+
+  {{yebo-grid selectedAggs=model.selectedAggs aggs=model.aggs currentSortParam=model.sortParam meta=model.search.meta products=model.search.products}}
+</div>

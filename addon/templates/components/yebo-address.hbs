@@ -1,0 +1,50 @@
+{{yebo-input  value=address.firstname
+              errors=address.errors.firstname
+              attributeName="Nome"}}
+
+{{yebo-input  value=address.lastname
+              errors=address.errors.lastname
+              attributeName="Sobrenome"}}
+
+{{yebo-input  value=address.address1
+              errors=address.errors.address1
+              attributeName="Street Address"}}
+
+{{yebo-input  value=address.address2
+              errors=address.errors.address2
+              attributeName="Address (cont.)"}}
+
+{{yebo-input  value=address.city
+              errors=address.errors.city
+              attributeName="City"}}
+
+{{yebo-input  value=address.zipcode
+              errors=address.errors.zipcode
+              attributeName="Zipcode"}}
+
+{{#yebo-select value=address.country}}
+  {{#each countries as |country|}}
+    {{#x-option value=country}}{{country.name}}{{/x-option}}
+  {{/each}}
+{{/yebo-select}}
+
+{{#if address.country.states.length}}
+  {{#yebo-select value=address.state}}
+    {{#each address.country.states as |state|}}
+      {{#x-option value=state}}{{state.name}}{{/x-option}}
+    {{/each}}
+  {{/yebo-select}}
+{{else}}
+  {{#if address.country.statesRequired}}
+    {{yebo-input  value=address.stateName
+                  errors=address.errors.stateName
+                  attributeName="State"}}
+  {{/if}}
+{{/if}}
+
+{{yebo-input  value=address.phone
+              errors=address.errors.phone
+              attributeName="Phone"}}
+
+<a href="#" class="btn checkout-button btn-cancel">Cancelar</a>
+<a href="#" {{action 'saveAddress' name address}} class="btn checkout-button">Salvar</a>

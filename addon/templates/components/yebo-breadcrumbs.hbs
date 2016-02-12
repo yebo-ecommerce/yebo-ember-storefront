@@ -1,0 +1,11 @@
+<ul class="breadcrumbs">
+  <li>{{link-to 'Home' 'yebo.index'}}</li>
+
+  {{#each items as |item|}}
+    <li>
+      {{link-to item.name 'yebo.taxons.show' item.permalink}}
+    </li>
+  {{/each}}
+
+  <li>{{lastItem.name}}</li>
+</ul>
