@@ -5,7 +5,4 @@ import SearchRoute from 'yebo-ember-storefront/mixins/search-route';
 /**
  * Product index route
  */
-export default Ember.Route.extend(SearchRoute, {
-  lalal: "asdasd",
-  asdasdsa: "asdasd"
-});
+export default Ember.Route.extend(SearchRoute, {});
