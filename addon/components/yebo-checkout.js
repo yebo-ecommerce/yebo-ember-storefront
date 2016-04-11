@@ -1,5 +1,6 @@
 import Ember from 'ember';
 import layout from '../templates/components/yebo-checkout';
+
 /**
   A single page checkout that reactively responds to changes in the
   `yebo.checkouts` service.
@@ -55,6 +56,12 @@ export default Ember.Component.extend({
     editAddress: function(name) {
       // Trigger the event
       this.get('yebo').get('checkouts').trigger('editAddress', name);
+    },
+    cancel: function(){
+      this.get('yebo').get('checkouts').set('editAddress', null);
+    },
+    loading: function(state) {
+      this.set("checkoutLoading", state);
     }
   }
 });

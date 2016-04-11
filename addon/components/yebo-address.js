@@ -1,5 +1,6 @@
 import Ember from 'ember';
 import layout from '../templates/components/yebo-address';
+import parseTime from '../helpers/parse-time';
 /**
   Controls data entry for an order's Ship or Bill Address.
 
@@ -19,6 +20,9 @@ import layout from '../templates/components/yebo-address';
 */
 export default Ember.Component.extend({
   layout: layout,
+  // birthDate: Ember.computed('address.birthDate', function() {
+  //   return parseTime.compute([this.get('address.birthDate'), 'l'])
+  // }),
   actions: {
     saveAddress: function(name, address) {
       // Send it to the checkout service

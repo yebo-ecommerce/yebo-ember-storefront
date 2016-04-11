@@ -2,7 +2,7 @@
   <div class='small-12 medium-4 columns'>
     <h4>Ship Address {{#if isConfirmationPage}}<a {{action 'transitionCheckoutState' 'address'}}>(Edit)</a>{{/if}}</h4>
     <hr />
-    <h6>{{order.shipAddress.firstname}} {{order.shipAddress.lastname}}</h6>
+    <h6>{{order.shipAddress.firstName}} {{order.shipAddress.lastName}}</h6>
     <h6>{{order.shipAddress.address1}}</h6>
     <h6>{{order.shipAddress.address2}}</h6>
     <h6>{{order.shipAddress.city}} {{order.shipAddress.state.abbr}} {{order.shipAddress.zipcode}}</h6>
