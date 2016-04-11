@@ -19,6 +19,7 @@ module.exports = {
     });
 
     app.import('vendor/register-storefront.js');
+    app.import(app.bowerDirectory + '/jquery.inputmask/dist/min/jquery.inputmask.bundle.min.js');
 
     var options = app.options['yebo-ember-storefront'] || {};
 
