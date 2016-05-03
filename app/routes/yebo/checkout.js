@@ -1,5 +1,6 @@
 import Ember from 'ember';
 import AuthenticatedRouteMixin from 'ember-simple-auth/mixins/authenticated-route-mixin';
+
 /**
   The checkout route.
 
@@ -18,6 +19,14 @@ import AuthenticatedRouteMixin from 'ember-simple-auth/mixins/authenticated-rout
  @extends Ember.Component
  */
 export default Ember.Route.extend(AuthenticatedRouteMixin, {
+  orderDidChange: Ember.on('init', Ember.observer('yebo.currentOrder', function() {
+    if(this.get("yebo.currentOrder.lineItems.length") > 1) {
+      return this.get('yebo').get('checkouts').trigger('checkoutCalled');
+    }
+
+    console.log('cart is empty');
+  })),
+
   redirect: function(model) {
     this.get('yebo').get('checkouts').on('orderCompleted', (order)=> {
       // TODO: Move to a config

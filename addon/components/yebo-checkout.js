@@ -35,12 +35,6 @@ export default Ember.Component.extend({
     });
   },
 
-  orderDidChange: Ember.on('init', Ember.observer('yebo.currentOrder', function() {
-    if(this.get("yebo.currentOrder") !== null) {
-      this.get('yebo').get('checkouts').trigger('checkoutCalled');
-    }
-  })),
-
   actions: {
     transitionCheckoutState: function(stateName) {
       this.sendAction('action', stateName);

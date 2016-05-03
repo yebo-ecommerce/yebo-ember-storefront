@@ -42,6 +42,10 @@ export default Ember.Service.extend(Ember.Evented, {
         // The Query result
         let result = [];
 
+        // Set meta
+        store.query('product', res.meta);
+        delete res.taxons;
+
         // Push the records to the ember
         store.pushPayload(res);
 
