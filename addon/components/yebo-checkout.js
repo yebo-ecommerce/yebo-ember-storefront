@@ -23,6 +23,15 @@ export default Ember.Component.extend({
   layout: layout,
   action: 'transitionCheckoutState',
   checkoutLoading: false,
+
+  orderDidChange: Ember.on('init', Ember.observer('yebo.currentOrder', function() {
+    if(this.get("yebo.currentOrder.lineItems.length") >= 1) {
+      this.get('yebo').get('checkouts').trigger('checkoutCalled');
+    } else {
+      console.log('cart is empty');
+    }
+  })),
+
   init() {
     this._super();
 
