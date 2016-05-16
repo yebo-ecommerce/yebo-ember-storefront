@@ -19,6 +19,15 @@ import AuthenticatedRouteMixin from 'ember-simple-auth/mixins/authenticated-rout
  @extends Ember.Component
  */
 export default Ember.Route.extend(AuthenticatedRouteMixin, {
+
+  orderDidChange: Ember.on('init', Ember.observer('yebo.currentOrder', function() {
+    if(this.get("yebo.currentOrder.lineItems.length") >= 1) {
+      this.get('yebo').get('checkouts').trigger('checkoutCalled');
+    } else {
+      console.log('cart is empty');
+    }
+  })),
+
   redirect(model) {
     this.get('yebo').get('checkouts').on('orderCompleted', (order)=> {
       // TODO: Move to a config
@@ -29,5 +38,5 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
     if(this.get("yebo.orderId") === null){
       this.transitionTo('yebo.index');
     };
-  },
+  }
 });
