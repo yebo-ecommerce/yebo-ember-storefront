@@ -44,7 +44,6 @@
   ],
   "dependencies": {
     "ember-cli-babel": "^5.1.3",
-    "ember-cli-htmlbars": "0.7.6",
     "yebo-ember-core": "*",
     "yebo-ember-checkouts": "*",
     "emberx-select": "2.0.2",
