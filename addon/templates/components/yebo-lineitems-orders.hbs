@@ -1,0 +1,47 @@
+<div class="titles-cart-table">
+  <div class="large-4 medium-4 small-9 columns title-tab-cart">PRODUTO<span phone> / PREÇO</span></div>
+  <div class="large-3 medium-3 columns title-tab-cart" desk tablet>PREÇO UNITÁRIO</div>
+  <div class="large-2 medium-2 columns small-3 title-tab-cart">QNTD.</div>
+  <div class="large-3 medium-3 columns title-tab-cart" desk tablet>SUBTOTAL</div>
+</div>
+<div class="table-cart">
+  {{#each lineItems as |lineItem|}}
+    <div class="large-4 medium-4 small-9 columns prod-cart">
+      {{#if lineItem.variant.images.firstObject.smallUrl}}
+        <img src="{{lineItem.variant.images.firstObject.smallUrl}}" alt="" class="img-prod-cart">
+      {{else}}
+        <img src="/assets/img/produto-sem-imagem.jpg" alt="" class="img-prod-cart">
+      {{/if}}
+      <div class="right-table">
+        <b>{{lineItem.variant.name}}</b><br>{{#if lineItem.variant.optionsText}}<span>{{lineItem.variant.optionsText}}</span><br phone>{{/if}}<div class="prices-cart" phone><b>{{lineItem.displayAmount}}</b><br>
+          <!--
+            EM ATÉ 6X S/ JUROS OU<br><br>
+            <b>R$ 170,00</b><br>
+            NO BOLETO
+          -->
+        </div>
+      </div>
+    </div>
+    <div class="large-3 medium-3 columns prices-unity-cart" desk tablet>
+      <b>{{lineItem.singleDisplayAmount}}</b><br>
+      <!--
+        EM ATÉ 6X S/ JUROS OU<br><br>
+        <b>R$ 170,00</b><br>
+        NO BOLETO
+      -->
+    </div>
+    <div class="large-2 medium-2 small-3 columns qtd-cart">
+      <span class="number">
+        {{lineItem.quantity}}
+      </span><br>
+    </div>
+    <div class="large-3 medium-3 columns prices-cart" desk tablet>
+      <b>{{lineItem.displayAmount}}</b><br>
+      <!--
+        EM ATÉ 6X S/ JUROS OU<br><br>
+        <b>R$ 170,00</b><br>
+        NO BOLETO
+      -->
+    </div>
+  {{/each}}
+</div>

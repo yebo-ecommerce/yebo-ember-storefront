@@ -1,29 +1,28 @@
-<div class='row'>
+<div class='row order-row'>
   <div class='small-12 medium-4 columns'>
-    <h4>Ship Address {{#if isConfirmationPage}}<a {{action 'transitionCheckoutState' 'address'}}>(Edit)</a>{{/if}}</h4>
+    <h4 class="subtitle-section">Endereço de entrega {{#if isConfirmationPage}}(<a {{action 'transitionCheckoutState' 'address'}}>Editar</a>){{/if}}</h4>
     <hr />
     <h6>{{order.shipAddress.firstName}} {{order.shipAddress.lastName}}</h6>
     <h6>{{order.shipAddress.address1}}</h6>
     <h6>{{order.shipAddress.address2}}</h6>
     <h6>{{order.shipAddress.city}} {{order.shipAddress.state.abbr}} {{order.shipAddress.zipcode}}</h6>
     <h6>{{order.shipAddress.country.name}}</h6>
-    <h6>Phone {{order.shipAddress.phone}}</h6>
+    <h6>Telefone: {{order.shipAddress.phone}}</h6>
   </div>
   <div class='small-12 medium-4 columns'>
-    <h4>Shipments</h4>
+    <h4 class="subtitle-section">Frete</h4>
     <hr />
     {{#each order.shipments as |shipment|}}
-      <h6>From {{shipment.stockLocation.name}} via {{shipment.selectedShippingRate.name}}</h6>
+      <h6>De {{shipment.stockLocation.name}} :: via {{shipment.selectedShippingRate.name}}</h6>
     {{/each}}
   </div>
   <div class='small-12 medium-4 columns'>
-    <h4>Payment</h4>
+    <h4 class="subtitle-section">Pagamento</h4>
     <hr />
     <h6>{{order.activePayment.paymentMethod.name}}</h6>
   </div>
   <div class='small-12 columns'>
-    <hr />
-    {{yebo-lineitems lineItems=order.lineItems}}
+    {{yebo-lineitems-orders lineItems=order.lineItems}}
     {{yebo-details order=order}}
   </div>
 </div>

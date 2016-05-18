@@ -1,0 +1,61 @@
+<form>
+	<div class="line-orders large-3 medium-3 small-12 columns" desk tablet>
+		<b>Valor</b>
+	</div>
+	<div class="line-orders large-3 medium-3 small-12 columns" desk tablet>
+		<b>Entrega</b>
+	</div>
+	<div class="line-orders large-3 medium-3 small-12 columns" desk tablet>
+		<b>Pagamento</b>
+	</div>
+	<div class="line-orders large-3 medium-3 small-12 columns" desk tablet>
+		<b>Pedido</b>
+	</div>
+	{{#if orders}}
+		{{#each orders as |order|}}
+		  <div class="line-orders large-3 medium-3 small-12 columns" desk tablet>
+		    {{order.displayItemTotal}}
+		  </div>
+		  <div class="line-orders large-3 medium-3 small-12 columns" desk tablet>
+		    {{#each order.shipments as |ship index|}}
+				{{#if (eq index 0)}}
+					{{#if (eq ship.state 'pending')}}
+						pendente
+					{{/if}}
+					{{#if (eq ship.state 'failed')}}
+						falhou
+					{{/if}}
+					{{#if (eq ship.state 'completed')}}
+						sucesso
+					{{/if}}
+				{{/if}}
+		    {{/each}}
+		  </div>
+		  <div class="line-orders large-3 medium-3 small-12 columns" desk tablet>
+		    {{#each order.payments as |pay index|}}
+				{{#if (eq index 0)}}
+					{{#if (eq pay.state 'pending')}}
+						pendente
+					{{/if}}
+					{{#if (eq pay.state 'failed')}}
+						falhou
+					{{/if}}
+					{{#if (eq pay.state 'completed')}}
+						sucesso
+					{{/if}}
+				{{/if}}
+		    {{/each}}
+		  </div>
+		  <div class="line-orders large-3 medium-3 small-12 columns">
+		    {{#link-to 'yebo.orders.show' order.number}}
+		      {{order.number}}
+		    {{/link-to}}
+		  </div>
+		  <div style="clear: both;"></div>
+		{{/each}}
+	{{else}}
+		<div class="line-orders large-12 medium-12 small-12 columns empty-orders">
+			Nenhum pedido contabilizado.
+		</div>
+	{{/if}}
+</form>

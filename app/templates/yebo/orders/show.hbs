@@ -1,9 +1,17 @@
-<div class="row">
-  <div class="small-12 columns text-center">
-    <h1>Order {{model.id}}</h1>
-    <h6>Your order is complete.</h6>
-    <hr />
+<section id="orders">
+  <div class="row">
+    <div class="cart-content">
+      <div id="enderecoCobranca">
+        <div class="titles-cart-table">
+          <h2 class="cart-title order-title">
+            PEDIDO {{model.id}}<br>
+            <span>Seu pedido foi contabilizado.</span>
+          </h2>
+        </div>
+        <form>
+          {{yebo-order order=model}}
+        </form>
+      </div>
+    </div>
   </div>
-</div>
-
-{{yebo-order order=model}}
+</section>

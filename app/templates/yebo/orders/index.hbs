@@ -1,13 +1,14 @@
-<div class="row">
-  <h1>Pedidos</h1>
-  <div class="small-12 medium-3 columns panel">
-
+<section id="orders">
+  <div class="row">
+    <div class="cart-content">
+      <div id="enderecoCobranca">
+        <div class="titles-cart-table">
+          <h2 class="cart-title">
+            <i></i> MEUS PEDIDOS
+          </h2>
+        </div>
+        {{yebo-orders orders=model}}
+      </div>
+    </div>
   </div>
-  <div class="small-12 medium-9 columns">
-    {{#each model as |order|}}
-      {{#link-to 'yebo.orders.show' order.number}}
-        {{order.number}}
-      {{/link-to}}
-    {{/each}}
-  </div>
-</div>
+</section>
