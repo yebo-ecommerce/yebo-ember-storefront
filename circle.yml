@@ -5,7 +5,7 @@ test:
     - echo "test"
 deployment:
   npm:
-      branch: develop
+    branch: develop
     commands:
       # login using environment variables
       - echo -e "$NPM_USERNAME\n$NPM_PASSWORD\n$NPM_EMAIL" | npm login
