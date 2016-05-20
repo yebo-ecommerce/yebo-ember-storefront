@@ -5,25 +5,25 @@ import Ember from 'ember';
  */
 export default Ember.Service.extend(Ember.Evented, {
   /**
-   * Yebo main service reference
-   */
+* Yebo main service reference
+*/
   yebo: Ember.inject.service('yebo'),
 
-  /**
-   * Current Query
-   */
+    /**
+  * Current Query
+  */
   currentQuery: null,
 
-  /**
-   * This methods returns an promise that resolves an array of products
-   * that are the result of an query executed in the Yebo API.
-   *
-   * @method
-   * @public
-   * @param {YeboSDK.Products} query An instance of the YeboSDK.Products or the
-   * options that will be used to create a new instance of this class
-   * @return {Promise} The result of the query and the meta information
-   */
+    /**
+  * This methods returns an promise that resolves an array of products
+  * that are the result of an query executed in the Yebo API.
+  *
+  * @method
+  * @public
+  * @param {YeboSDK.Products} query An instance of the YeboSDK.Products or the
+  * options that will be used to create a new instance of this class
+  * @return {Promise} The result of the query and the meta information
+  */
   search(query) {
     // Yebo Store
     let store = this.get('yebo').store;
@@ -40,35 +40,40 @@ export default Ember.Service.extend(Ember.Evented, {
     return new Ember.RSVP.Promise((resolve, reject) => {
       // Execute the query
       query.execute().then(res => {
-        // Set meta
-        // store.query('product', res.meta);
-        delete res.taxons;
+        const meta = res.meta
+        delete res.meta
 
         // Push the records to ember
-        store.pushPayload('product', res);
+        store.pushPayload(res)
+
+        // Return material
+        let promises = {
+          products: store.peekAll('product', res.products.map(p => p.id)),
+          meta: meta
+        }
 
         // Resolve with the result
-        resolve({
-          products: res.products.map(product => store.peekRecord('product', product.id)),
-          meta: res.meta
-        });
+        resolve(Ember.RSVP.hash(promises));
       }).catch((error) => {
+        // Log it
+        console.log('Error on serialization')
+
         // Error!
-        reject(error);
+        reject(error)
       });
     });
   },
 
-  /**
-   * This method return the possible filters that can applied to the
-   * products that match the query passed.
-   *
-   * @method
-   * @public
-   * @param {YeboSDK.Products} query An instance of the YeboSDK.Products or the
-   * options that will be used to create a new instance of this class
-   * @return {Promise} The result with the aggregations
-   */
+    /**
+  * This method return the possible filters that can applied to the
+  * products that match the query passed.
+  *
+  * @method
+  * @public
+  * @param {YeboSDK.Products} query An instance of the YeboSDK.Products or the
+  * options that will be used to create a new instance of this class
+  * @return {Promise} The result with the aggregations
+  */
   aggs(query) {
   }
 });
