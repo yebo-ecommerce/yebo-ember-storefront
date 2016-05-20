@@ -48,7 +48,7 @@ export default Ember.Service.extend(Ember.Evented, {
 
         // Return material
         let promises = {
-          products: store.peekAll('product', res.products.map(p => p.id)),
+          products: res.products.map(p => store.peekRecord('product', p.id)),
           meta: meta
         }
 
