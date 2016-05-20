@@ -25,41 +25,33 @@ export default Ember.Service.extend(Ember.Evented, {
    * @return {Promise} The result of the query and the meta information
    */
   search(query) {
+    // Yebo Store
+    let store = this.get('yebo').store;
+
     // Check if the query is the YeboSDK Object
-    if( query === undefined )
+    if( query === undefined ) {
       query = new YeboSDK.Products();
+    }
 
     // Set it to the currentQuery
-    // this.set('currentQuery', query);
+    this.set('currentQuery', query);
 
     // Return a Promise
     return new Ember.RSVP.Promise((resolve, reject) => {
       // Execute the query
-      query.execute().then((res) => {
-        // Yebo Store
-        let store = this.get('yebo').store;
-
-        // The Query result
-        let result = [];
-
+      query.execute().then(res => {
         // Set meta
-        store.query('product', res.meta);
+        // store.query('product', res.meta);
         delete res.taxons;
 
-        // Push the records to the ember
-        store.pushPayload(res);
-
-        // Return the result of the search
-        for( let i = 0; i < res.products.length; i++ ) {
-          // Current product
-          let product = res.products[i];
-
-          // Push it to the results
-          result.push(store.peekRecord('product', product.id));
-        }
+        // Push the records to ember
+        store.pushPayload('product', res);
 
         // Resolve with the result
-        resolve({ products: result, meta: res.meta });
+        resolve({
+          products: res.products.map(product => store.peekRecord('product', product.id)),
+          meta: res.meta
+        });
       }).catch((error) => {
         // Error!
         reject(error);
