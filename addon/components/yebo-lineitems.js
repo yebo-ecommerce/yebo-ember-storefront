@@ -1,5 +1,6 @@
 import Ember from 'ember';
 import layout from '../templates/components/yebo-lineitems';
+const inject = Ember.inject;
 /**
   A table for listing the Line Items in an order.  Used on the Cart, Checkouts
   confirmation, and Orders show routes.
@@ -19,6 +20,7 @@ import layout from '../templates/components/yebo-lineitems';
   @extends Ember.Component
 */
 export default Ember.Component.extend({
+  notify: inject.service(),
   layout: layout,
   action: 'deleteLineItem',
 
@@ -30,12 +32,16 @@ export default Ember.Component.extend({
 
     removeQtyItem: function(lineItem) {
       // Add using the current-order-support method
-      this.yebo.removeFromTheCart(lineItem, 1);
+      this.yebo.removeFromTheCart(lineItem, 1).catch(e => {
+        e.errors.forEach(m => this.get('notify').alert(m) )
+      })
     },
 
     addQtyItem: function(lineItem) {
       // Add using the current-order-support method
-      this.yebo.addToCart(lineItem.get('variant'), 1);
+      this.yebo.addToCart(lineItem.get('variant'), 1).catch(e => {
+        e.errors.forEach(m => this.get('notify').alert(m) )
+      })
     }
   }
 });
