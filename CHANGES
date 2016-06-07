@@ -1,3 +1,17 @@
+Version 0.3.4:
+ - handle error
+ - bumpversion
+ - peekAll doesn't work
+ - fix identation
+ - change branch to deploy app
+ - bumpversion
+ - bumpversion
+ - remove duplicated calls
+ - few translations
+ - Merge tag '0.3.3' into develop
+ - Merge branch 'release/0.3.3'
+ - chekout tweks
+
 Version 0.3.3:
 
 
