@@ -36,11 +36,11 @@ export default Ember.Component.extend({
     this._super();
 
     this.get('yebo').on('checkoutStarted', () => {
-      this.set("checkoutLoading", true);
+      if(!this.isDestroyed) { this.set("checkoutLoading", true) }
     });
 
     this.get('yebo').on('checkoutEnded', () => {
-      this.set("checkoutLoading", false);
+      if(!this.isDestroyed) { this.set("checkoutLoading", false) }
     });
   },
 
