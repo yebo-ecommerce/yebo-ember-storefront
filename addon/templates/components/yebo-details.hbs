@@ -3,7 +3,7 @@
     <legend>Order Details</legend>
     <div class="row">
       <div class="small-6 columns">
-        <h6>Item Total:</h6>
+        <h6>Total dos items:</h6>
       </div>
       <div class="small-6 columns text-right">
         <h6>{{order.displayItemTotal}}</h6>
@@ -13,7 +13,7 @@
     {{#if order.shipmentTotal}}
       <div class="row">
         <div class="small-6 columns">
-          <h6>Shipping:</h6>
+          <h6>Entrega:</h6>
         </div>
         <div class="small-6 columns text-right">
           <h6>{{order.displayShipmentTotal}}</h6>
@@ -24,7 +24,7 @@
     {{#if order.includedTaxTotal}}
       <div class="row">
         <div class="small-6 columns">
-          <h6>Tax:</h6>
+          <h6>Impostos:</h6>
         </div>
         <div class="small-6 columns text-right">
           <h6>{{order.displayIncludedTaxTotal}}</h6>
@@ -32,9 +32,21 @@
       </div>
     {{/if}}
 
+    {{#if order.promoTotal}}
+      <div class="row">
+        <div class="small-6 columns">
+          <h6>Promoção:</h6>
+        </div>
+        <div class="small-6 columns text-right">
+          <h6>{{order.promoTotal}}</h6>
+        </div>
+      </div>
+    {{/if}}
+
+
     <div class="row">
       <div class="small-6 columns">
-        <h6>Order Total:</h6>
+        <h6>Total do pedido:</h6>
       </div>
       <div class="small-6 columns text-right">
         <h6>{{order.displayTotal}}</h6>
