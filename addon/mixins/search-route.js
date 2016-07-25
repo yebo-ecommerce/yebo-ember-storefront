@@ -112,10 +112,11 @@ export default Ember.Mixin.create({
     };
 
     // Check if its necessary to get the aggregations
-    if( this.get('currentAggregation') === null || this.get('refreshAggregations') )
+    if( this.get('currentAggregation') === null || this.get('refreshAggregations') ) {
       defaultPromises.aggs = query.aggregations(this.get('defaultTaxonRoot'), this.get('defaultPriceRanges'));
-    else
+    } else {
       defaultPromises.aggs = this.get('currentAggregation');
+    }
 
     // Return a promise to the route
     return new Ember.RSVP.Promise((resolve, reject) => {
