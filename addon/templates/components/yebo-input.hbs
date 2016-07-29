@@ -1,9 +1,9 @@
 <label>
   {{if label label attributeName}}
-  {{#if hasType}}
+  {{#if aliasType}}
     {{input value=value
             classBinding="errors.length:error"
-            type=type
+            type=aliasType
             placeholder=placeholder}}
   {{else}}
     {{input value=value
