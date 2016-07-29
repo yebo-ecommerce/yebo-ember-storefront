@@ -1,14 +1,7 @@
 <label>
   {{if label label attributeName}}
-  {{#if aliasType}}
-    {{input value=value
-            classBinding="errors.length:error"
-            type=aliasType
-            placeholder=placeholder}}
-  {{else}}
-    {{input value=value
-            classBinding="errors.length:error"
-            placeholder=placeholder}}
-  {{/if}}
+  {{input value=value
+          classBinding="errors.length:error"
+          placeholder=placeholder}}
 </label>
 {{#if errors.length}}<small class="error">{{displayErrors}}</small>{{/if}}

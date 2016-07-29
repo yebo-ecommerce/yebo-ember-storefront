@@ -19,9 +19,6 @@ import layout from '../templates/components/yebo-input';
 */
 export default Ember.Component.extend({
   layout: layout,
-  aliasType: Ember.computed('type', function() {
-    return this.type;
-  }),
 
   displayErrors: Ember.computed('errors.[]', 'attributeName',  function() {
     var errors = this.get('errors') || [];
