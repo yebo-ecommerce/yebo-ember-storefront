@@ -1,12 +1,12 @@
 <label>
   {{if label label attributeName}}
-  {{#if type}}
-    {{input value=value 
+  {{#if hasType}}
+    {{input value=value
             classBinding="errors.length:error"
             type=type
             placeholder=placeholder}}
   {{else}}
-    {{input value=value 
+    {{input value=value
             classBinding="errors.length:error"
             placeholder=placeholder}}
   {{/if}}
