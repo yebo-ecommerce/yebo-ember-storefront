@@ -20,22 +20,21 @@
       </select>
     </div>
   </h3>
-  {{if productsGrid.searches}}
-    <div class="filter-box large-12 columns">
-      <h3 class="title">Buscas <i class="arrow-icon"></i></h3>
-      {{#each productsGrid.searches as |search|}}
-        <a class="yebo-grid__button_filter {{btnStatus search.value productsGrid.selected.search}}" {{action "changeSearch" search.value}}>
-          <label>{{search.value}}</label>
-        </a>
-      {{/each}}
-    </div>
-  {{/if}}
 
   <div class="filter-box large-12 columns">
-    <h3 class="title">Categorias <i class="arrow-icon"></i></h3>
+    <h3 class="title">Categorias</h3>
     {{#each productsGrid.categories as |taxon|}}
       <a class="yebo-grid__button_filter {{btnStatus taxon.permalink productsGrid.selected.taxon}}" {{action "changeTaxon" taxon.permalink}}>
-        <i></i> {{taxon.name}} <small>({{taxon.count}})</small>
+        {{taxon.name}} <small>({{taxon.count}})</small>
+      </a>
+    {{/each}}
+  </div>
+
+  <div class="filter-box large-12 columns">
+    <h3 class="title">Marcas</h3>
+    {{#each productsGrid.brands as |taxon|}}
+      <a class="yebo-grid__button_filter {{btnStatus taxon.permalink productsGrid.selected.taxon}}" {{action "changeTaxon" taxon.permalink}}>
+        {{taxon.name}} <small>({{taxon.count}})</small>
       </a>
     {{/each}}
   </div>
@@ -85,10 +84,10 @@
         {{#each filter.values as |value|}}
           {{value.presentation}} ({{value.count}})
           {{yebo-filter-select
-            action='changeFilters'
-            value=value
-            selection=productsGrid.aggs.filters
-            filterName=filter.name}}
+          action='changeFilters'
+          value=value
+          selection=productsGrid.aggs.filters
+          filterName=filter.name}}
         {{/each}}
       {{/each}}
     </div>
