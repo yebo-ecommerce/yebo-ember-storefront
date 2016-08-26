@@ -29,16 +29,6 @@
       </a>
     {{/each}}
   </div>
-
-  <div class="filter-box large-12 columns">
-    <h3 class="title">Marcas</h3>
-    {{#each productsGrid.brands as |taxon|}}
-      <a class="yebo-grid__button_filter {{btnStatus taxon.permalink productsGrid.selected.taxon}}" {{action "changeTaxon" taxon.permalink}}>
-        {{taxon.name}} <small>({{taxon.count}})</small>
-      </a>
-    {{/each}}
-  </div>
-
   {{#if productsGrid.brands}}
     <div class="filter-box large-12 columns">
       <h3 class="title">Marcas <i class="arrow-icon"></i></h3>
