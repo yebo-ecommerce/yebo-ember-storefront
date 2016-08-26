@@ -20,6 +20,9 @@ export default Ember.Service.extend({
 
   aggsQuery: {},
 
+  // Loadin property
+  loading: false,
+
   // yebi
   yebo: {},
 
@@ -112,8 +115,10 @@ export default Ember.Service.extend({
     // Set it into the query
     query.and(rules.filter(r => r.values[0] != null))
 
+    this.set('loading', true)
     // Set promise
     this.get('yebo.products').search(query).then(res => {
+      this.set('loading', false)
       this.set('list', res.products)
       this.set('meta', res.meta)
     })
@@ -212,7 +217,7 @@ export default Ember.Service.extend({
   permalinkChanged: Ember.observer('selected.permalink', function() {
     //document.getElementById("input-search").value = "";
     const permalink = this.get('selected.permalink')
-    if (permalink === undefined) {
+    if (permalink === null) {
       return
     }
     const filters = this.get('selected.filters')
@@ -315,4 +320,6 @@ export default Ember.Service.extend({
     this.loadProducts({ permalink: permalink, search: search, filters: filters, priceRange: priceRange, page: page, sort: sort, taxon: taxon })
   }
 });
+
+
 
