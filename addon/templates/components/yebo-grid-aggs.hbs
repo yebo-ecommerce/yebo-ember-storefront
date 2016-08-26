@@ -1,0 +1,97 @@
+<div class="banner-top {{productsGrid.taxon.permalink}}">
+  <div class="container">
+    <h1>{{productsGrid.taxon.name}}</h1>
+  </div>
+</div>
+<div class="filters large-2 medium-3 columns" desk tablet>
+  <div class="icon-left">
+    <span></span>
+  </div>
+
+  <h3 class="title-box large-12 columns">
+    <div class="container-select">
+      <div class="arrow-select"></div>
+      <select class="large-2 medium-4 small-12 columns select-order" onchange={{action 'changeSort' value='target.value'}}>
+        <option disabled selected>Ordenar por:</option>
+        <option selected={{eq productsGrid.selected.sort 'price-asc'}} value="price-asc">MENOR PREÇO</option>
+        <option selected={{eq productsGrid.selected.sort 'price-desc'}} value="price-desc">MAIOR PREÇO</option>
+        <option selected={{eq productsGrid.selected.sort 'name-asc'}} value="name-asc">NOME (A-Z)</option>
+        <option selected={{eq productsGrid.selected.sort 'name-desc'}} value="name-desc">NOME (Z-A)</option>
+      </select>
+    </div>
+  </h3>
+  {{if productsGrid.searches}}
+    <div class="filter-box large-12 columns">
+      <h3 class="title">Buscas <i class="arrow-icon"></i></h3>
+      {{#each productsGrid.searches as |search|}}
+        <a class="yebo-grid__button_filter {{btnStatus search.value productsGrid.selected.search}}" {{action "changeSearch" search.value}}>
+          <label>{{search.value}}</label>
+        </a>
+      {{/each}}
+    </div>
+  {{/if}}
+
+  <div class="filter-box large-12 columns">
+    <h3 class="title">Categorias <i class="arrow-icon"></i></h3>
+    {{#each productsGrid.categories as |taxon|}}
+      <a class="yebo-grid__button_filter {{btnStatus taxon.permalink productsGrid.selected.taxon}}" {{action "changeTaxon" taxon.permalink}}>
+        <i></i> {{taxon.name}} <small>({{taxon.count}})</small>
+      </a>
+    {{/each}}
+  </div>
+
+  {{#if productsGrid.brands}}
+    <div class="filter-box large-12 columns">
+      <h3 class="title">Marcas <i class="arrow-icon"></i></h3>
+      {{#each productsGrid.brands as |taxon|}}
+        <a class="yebo-grid__button_filter {{btnStatus taxon.permalink productsGrid.selected.taxon}}" {{action "changeTaxon" taxon.permalink}}>
+          <i></i> {{taxon.name}} <small>({{taxon.count}})</small>
+        </a>
+      {{/each}}
+    </div>
+  {{/if}}
+
+  {{#if productsGrid.sizes}}
+    <div class="filter-box large-12 columns">
+      <h3 class="title">Tamanhos <i class="arrow-icon"></i></h3>
+      {{#each productsGrid.sizes as |taxon|}}
+        <a class="yebo-grid__button_filter {{btnStatus taxon.permalink productsGrid.selected.taxon}}" {{action "changeTaxon" taxon.permalink}}>
+          <i></i> {{taxon.name}} <small>({{taxon.count}})</small>
+        </a>
+      {{/each}}
+    </div>
+  {{/if}}
+
+  {{#if productsGrid.prices}}
+    <div class="filter-box price large-12 columns">
+      <h3 class="title">Preço <i class="arrow-icon"></i></h3>
+      {{#each productsGrid.prices as |price index|}}
+        <label class="priceFilter">
+          <a class="yebo-grid__button_filter {{btnStatus price productsGrid.selected.priceRange}}" {{action "changePriceRange" price}}>
+            <i></i>
+            {{aggs-prices price index productsGrid.aggs.prices.length}}
+            <small>({{price.count}})</small>
+          </a>
+        </label>
+      {{/each}}
+    </div>
+  {{/if}}
+
+  {{#if productsGrid.filters}}
+    <div class="filter-box large-12 columns">
+      <h3 class="title">Filtros</h3>
+      {{#each productsGrid.filters as |filter|}}
+        <label>{{filter.presentation}}</label>
+        {{#each filter.values as |value|}}
+          {{value.presentation}} ({{value.count}})
+          {{yebo-filter-select
+            action='changeFilters'
+            value=value
+            selection=productsGrid.aggs.filters
+            filterName=filter.name}}
+        {{/each}}
+      {{/each}}
+    </div>
+  {{/if}}
+</div>
+

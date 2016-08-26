@@ -1,0 +1,58 @@
+<div class="pop block-home large-10 medium-9 small-12 columns">
+  <h3 class="title-box large-12 columns">
+    <div class="container-select">
+      <div class="arrow-select"></div>
+      <select class="large-2 medium-4 small-12 columns select-order" onchange={{action 'changeSort' value='target.value'}}>
+        <option disabled selected>Ordenar por:</option>
+        <option selected={{eq productsGrid.selected.sort 'price-asc'}} value="price-asc">MENOR PREÇO</option>
+        <option selected={{eq productsGrid.selected.sort 'price-desc'}} value="price-desc">MAIOR PREÇO</option>
+        <option selected={{eq productsGrid.selected.sort 'name-asc'}} value="name-asc">NOME (A-Z)</option>
+        <option selected={{eq productsGrid.selected.sort 'name-desc'}} value="name-desc">NOME (Z-A)</option>
+      </select>
+    </div>
+  </h3>
+  <div class="pop block-home large-10 medium-9 small-12 columns">
+    <div class="prods">
+      <span class="large-10 medium-8 small-12 columns find-products" desk tablet>({{productsGrid.meta.total_count}} produtos encontrados)</span>
+      <ul class="all-product-list">
+        {{#if loading}}
+
+        {{else}}
+          {{#each productsGrid.list as |product|}}
+            <li>
+              <div class="container-hover">
+                {{#link-to 'yebo.products.show' product}}
+                  {{#if product.image}}
+                    <div class="img-product" style="background-image: url('{{product.image.largeUrl}}');"></div>
+                  {{else}}
+                    <div class="img-product" style="background-image: url('/assets/img/produto_sem_foto.gif');"></div>
+                  {{/if}}
+                  <p {{bee-less}} class="name-product">{{product.name}}</p>
+                  <p class="after-price">De: <span>{{product.discountPrice}}</span></p>
+                  <p class="now-price">{{product.price}}</p>
+                  <p class="installments">{{product.installment.cartaoDeCredito.size}}x de {{product.installment.cartaoDeCredito.value}} sem juros.</p>
+                {{/link-to}}
+
+                <div class="container-buttons-products">
+                  {{#link-to 'yebo.products.show' product class="detail-product"}}Comprar{{/link-to}}
+                  <a href="" class="buy-product" {{action 'addToCartNotRedirect' product}}><span></span></a>
+                </div>
+              </div>
+            </li>
+          {{/each}}
+        {{/if}}
+      </ul>
+
+      {{#if productsGrid.list}}
+        <ul class="pagination bottom large-12 columns" role="navigation" aria-label="Paginação">
+          {{#each (range start=1 end=productsGrid.meta.total_pages) as |item|}}
+            <li class={{if (eq item productsGrid.meta.current_page) 'current'}} {{action 'changePage' item}}>
+              {{item}}
+            </li>
+          {{/each}}
+        </ul>
+      {{/if}}
+    </div>
+  </div>
+</div>
+
