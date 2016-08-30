@@ -68,7 +68,7 @@ export default Ember.Service.extend({
     this.set('hasInit', true)
   },
 
-  loadProducts({ search=null, permalink=null, page=null, perPage=null, sort=null, filters=[], taxon=null, priceRange=null }){
+  loadProducts({ search=null, permalink=null, page=null, perPage=15, sort=null, filters=[], taxon=null, priceRange=null }){
     // Create a new query
     const query = new YeboSDK.Products();
 
