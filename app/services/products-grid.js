@@ -9,6 +9,7 @@ export default Ember.Service.extend({
     permalink: null,
     search: null,
     page: null,
+    perPage: null,
     filters: null,
     taxon: null,
     priceRange: null,
@@ -37,7 +38,7 @@ export default Ember.Service.extend({
   // @param {String} sort:
   // @param {String} taxon:
   // @param {Object} yebo:
-  initService({ permalink=null, search=null, filters=[], priceRange=null, page=1, sort='name-asc', taxon=null, yebo=null }){
+  initService({ permalink=null, search=null, filters=[], priceRange=null, page=1, perPage=15, sort='name-asc', taxon=null, yebo=null }){
     // TODO: Validate
     this.yebo = yebo
     //
@@ -48,13 +49,14 @@ export default Ember.Service.extend({
     }
     permalink = permalink === "" ? undefined : permalink
 
-    this.loadProducts({ permalink: permalink, search: search, filters: filters, priceRange: priceRange, page: page, sort: sort, taxon: taxon })
+    this.loadProducts({ permalink: permalink, search: search, filters: filters, priceRange: priceRange, page: page, perPage: perPage, sort: sort, taxon: taxon })
     this.loadAggs({ permalink: permalink, filters: filters, search: search })
 
     // save
     this.set('selected.permalink', permalink)
     this.set('selected.search', search)
     this.set('selected.page', page)
+    this.set('selected.per_page', perPage)
     this.set('selected.filters', filters)
     this.set('selected.priceRange', priceRange)
     this.set('selected.sort',  sort)
@@ -66,12 +68,12 @@ export default Ember.Service.extend({
     this.set('hasInit', true)
   },
 
-  loadProducts({ search=null, permalink=null, page=null, sort=null, filters=[], taxon=null, priceRange=null }){
+  loadProducts({ search=null, permalink=null, page=null, perPage=null, sort=null, filters=[], taxon=null, priceRange=null }){
     // Create a new query
     const query = new YeboSDK.Products();
 
     // Define the number of results per page
-    query.perPage(6);
+    query.perPage(perPage);
 
     // Set the search
     if( search !== undefined ) {
