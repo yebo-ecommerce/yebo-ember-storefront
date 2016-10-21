@@ -1,8 +1,3 @@
-import Ember from 'ember';
+import eqHelper from 'yebo-ember-storefront/helpers/eq';
 
-export default Ember.Helper.helper(function(params, hash) {
-  let firstParam = params[0];
-  let secondParam = params[1];
-
-  return firstParam === secondParam;
-});
+export default eqHelper;
