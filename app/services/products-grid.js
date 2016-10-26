@@ -241,9 +241,15 @@ export default Ember.Service.extend({
     this.updateAttrs()
   }),
 
-  taxonChanged: Ember.observer('selected.taxon', function() {
+  setTaxon(taxon) {
+    const currenTaxon = this.get('selected.taxon')
+    if(currentTaxon === taxon) {
+      this.set('selected.taxon', null)
+    } else {
+      this.set('selected.taxon', taxon)
+    }
     this.updateAttrs()
-  }),
+  },
 
   filtersChanged(filters) {
     if(!this.get('hasInit')) { return }

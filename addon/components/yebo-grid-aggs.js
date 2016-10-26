@@ -6,7 +6,7 @@ export default Ember.Component.extend({
 
   actions: {
     changeTaxon(taxon) {
-      this.get('productsGrid').set('selected.taxon', taxon)
+      this.get('productsGrid').setTaxon(taxon)
       // this.sendAction('updateUrl', { taxon: taxon })
     },
     changeFilters(filter) {

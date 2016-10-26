@@ -1,2 +1,2 @@
 /* Yebo Ember Version Placeholder */
-  Ember.libraries.register('Yebo Ember Storefront', '0.5.3');
+  Ember.libraries.register('Yebo Ember Storefront', '0.5.4');
