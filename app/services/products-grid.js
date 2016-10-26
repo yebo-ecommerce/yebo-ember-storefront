@@ -242,12 +242,8 @@ export default Ember.Service.extend({
   }),
 
   setTaxon(taxon) {
-    const currenTaxon = this.get('selected.taxon')
-    if(currentTaxon === taxon) {
-      this.set('selected.taxon', null)
-    } else {
-      this.set('selected.taxon', taxon)
-    }
+    const currentTaxon = this.get('selected.taxon')
+    this.set('selected.taxon', (currentTaxon === taxon ? null : taxon))
     this.updateAttrs()
   },
 
