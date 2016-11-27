@@ -217,19 +217,12 @@ export default Ember.Service.extend({
 
   // Watchers
   permalinkChanged: Ember.observer('selected.permalink', function() {
-    //document.getElementById("input-search").value = "";
     const permalink = this.get('selected.permalink')
     if (permalink === null) {
       return
     }
     const filters = this.get('selected.filters')
     this.loadAggs({ permalink: permalink, filters: filters, reload: true })
-    // this.updateAttrs()
-    // Load taxons
-
-    this.yebo.store.find('taxon', permalink).then(t => {
-      this.set('taxon', t)
-    })
   }),
 
   pageChanged: Ember.observer('selected.page', function() {
