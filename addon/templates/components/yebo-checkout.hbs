@@ -84,6 +84,7 @@
     <section id="option-delivery-section" class="option-delivery" data-render-template="option-delivery"></section>
   </section>
 
+  {{#if canPay }}
   <section class="payment">
     <section class="title">Pagamento</section>
     <section class="payments-content">
@@ -199,6 +200,7 @@
 			</section>
     </section>
   </section>
+  {{/if}}
 
   <section class="cart-actions">
     <button onclick={{action "checkout"}} class="checkout-button" disabled={{eq yebo.checkouts.canCheckout false}}>Finalizar Compra</button>
