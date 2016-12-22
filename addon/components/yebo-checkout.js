@@ -45,6 +45,10 @@ export default Ember.Component.extend({
   },
 
   actions: {
+    checkoutState: function(state) {
+      this.set("checkoutLoading", state.loading);
+      this.set("canPay", state.canPay);
+    },
     transitionCheckoutState: function(stateName) {
       this.sendAction('action', stateName);
     },
