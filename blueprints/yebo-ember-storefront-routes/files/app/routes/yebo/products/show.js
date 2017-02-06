@@ -18,7 +18,7 @@ import Ember from 'ember';
 */
 export default Ember.Route.extend({
   model: function(params) {
-    return this.yebo.store.findBySlug('product', params.slug);
+    return this.yebo.store.find('product', params.slug);
   },
 
   actions: {
